@@ -1,0 +1,139 @@
+/* * This file contains global and mind map specific styles 
+ * using Tailwind CSS conventions for clarity.
+ */
+
+/* Root Layout for the MindMapPage */
+.mindmap-page-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+}
+
+.mindmap-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* MindMapCanvas Styles */
+.mindmap-canvas-container {
+    height: calc(100vh - 4rem); /* Adjust height to fit the screen */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* React Flow Wrapper to give it a defined size */
+.react-flow-wrapper {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+}
+
+/* React Flow Simulation Styles */
+.react-flow__canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #f8fafc;
+}
+
+/* Page Node Styles (The box in the flow) */
+.page-node.flow-node-style {
+    position: absolute; /* Needed for absolute positioning by Dagre/React Flow */
+    width: 300px; /* Dagre width defined in JS */
+    height: 60px; /* Dagre height defined in JS */
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* Tailwind: bg-white */
+    border: 1px solid #e2e8f0; /* Tailwind: border-slate-200 */
+    border-radius: 0.5rem; /* Tailwind: rounded-lg */
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    z-index: 10;
+}
+
+.page-node.flow-node-style:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.page-node.flow-node-style.selected {
+    border: 3px solid #4f46e5; /* Tailwind: border-indigo-600 */
+    background-color: #e0e7ff; /* Tailwind: bg-indigo-100 */
+}
+
+/* Edge Simulation Styles */
+.flow-edge-style {
+    position: absolute;
+    width: 2px; /* Line width defined in JS */
+    z-index: 5;
+    pointer-events: none; /* Ignore clicks */
+    /* Styles applied via inline style in JSX for position and size */
+}
+
+.edge-line {
+    width: 100%;
+    height: 100%;
+    background-color: #4f46e5; /* Indigo color for the line */
+    position: relative;
+}
+
+.edge-line::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Position below the line end */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #4f46e5; /* Arrowhead */
+}
+
+.edge-label-simulated {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.25rem 0.5rem;
+    background-color: #fff;
+    border: 1px solid #c7d2fe;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    color: #4338ca;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: auto; /* Allow interaction if needed */
+}
+
+
+/* Details Drawer Styles */
+.details-drawer {
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 50; /* Ensure it stays on top */
+}
+
+.details-drawer.open {
+    width: 400px; /* Desktop/Tablet width */
+}
+
+/* Mobile responsiveness for the drawer */
+@media (max-width: 768px) {
+    .details-drawer.open {
+        width: 100%; /* Full width on mobile */
+    }
+}
